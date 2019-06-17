@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName">
+			<value>com.mysql.jdbc.Driver</value>
+		</property>
+		<property name="url">
+			<value>jdbc:mysql://localhost:3306/online_examination_system?Unicode=true&amp;characterEncoding=utf-8</value>
+		</property>
+		<property name="username">
+			<value>root</value>
+		</property>
+		<property name="password">
+			<value>root</value>
+		</property>
+	</bean>
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource">
+			<ref local="dataSource" />
+		</property>
+		<property name="mappingResources">
+			<list>
+				<value>com/online_examination_system/bean/DeptBean.hbm.xml</value>
+				<value>com/online_examination_system/bean/MajorBean.hbm.xml</value>
+				<value>com/online_examination_system/bean/TeacherBean.hbm.xml</value>
+				<value>com/online_examination_system/bean/PoliticsClassBean.hbm.xml</value>
+				<value>com/online_examination_system/bean/PowerBean.hbm.xml</value>
+				<value>com/online_examination_system/bean/StudentBean.hbm.xml</value>
+				<value>com/online_examination_system/bean/CourseBean.hbm.xml</value>
+				<value>com/online_examination_system/bean/QuestionBankFillBean.hbm.xml</value>
+				<value>com/online_examination_system/bean/QuestionBankJudgeBean.hbm.xml</value>
+				<value>com/online_examination_system/bean/QuestionBankSelectBean.hbm.xml</value>
+				<value>com/online_examination_system/bean/QuestionBankShortAnswerBean.hbm.xml</value>
+				<value>com/online_examination_system/bean/PaperFillBean.hbm.xml</value>
+				<value>com/online_examination_system/bean/PaperJudgeBean.hbm.xml</value>
+				<value>com/online_examination_system/bean/PaperSelectBean.hbm.xml</value>
+				<value>com/online_examination_system/bean/PaperShortAnswerBean.hbm.xml</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">
+					org.hibernate.dialect.MySQLDialect
+				</prop>
+				<prop key="hibernate.show_sql">
+					true
+				</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<bean id="loginAction" class="com.online_examination_system.action.LoginAction" scope="prototype">
+		<property name="studentService">
+			<ref local="studentService" />
+		</property>
+		<property name="teacherService">
+			<ref local="teacherService" />
+		</property>
+	</bean>
+	
+	<bean id="deptDao" class="com.online_examination_system.dao.impl.DeptDAOImpl" scope="singleton">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="deptService" class="com.online_examination_system.service.impl.DeptServiceImpl">
+		<property name="deptDao">
+			<ref local="deptDao" />		
+		</property>
+	</bean>
+	<bean id="deptAction" class="com.online_examination_system.action.DeptAction" scope="prototype">
+		<property name="deptService">
+			<ref local="deptService" />
+		</property>
+	</bean>
+	<bean id="majorDAO" class="com.online_examination_system.dao.impl.MajorDAOImpl" scope="singleton">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="majorService" class="com.online_examination_system.service.impl.MajorServiceImpl">
+		<property name="majorDAO">
+			<ref local="majorDAO" />		
+		</property>
+	</bean>
+	<bean id="majorAction" class="com.online_examination_system.action.MajorAction" scope="prototype">
+		<property name="majorService">
+			<ref local="majorService" />
+		</property>
+		<property name="deptService">
+			<ref local="deptService" />
+		</property>
+	</bean>
+	<bean id="teacherDAO" class="com.online_examination_system.dao.impl.TeacherDAOImpl" scope="singleton">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="teacherService" class="com.online_examination_system.service.impl.TeacherServiceImpl">
+		<property name="teacherDAO">
+			<ref local="teacherDAO" />		
+		</property>
+	</bean>
+	<bean id="teacherAction" class="com.online_examination_system.action.TeacherAction" scope="prototype">
+		<property name="teacherService">
+			<ref local="teacherService" />
+		</property>
+	</bean>
+	<bean id="politicsClassDAO" class="com.online_examination_system.dao.impl.PoliticsClassDAOImpl" scope="singleton">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="politicsClassService" class="com.online_examination_system.service.impl.PoliticsClassServiceImpl">
+		<property name="politicsClassDAO">
+			<ref local="politicsClassDAO" />		
+		</property>
+	</bean>
+	<bean id="politicsClassAction" class="com.online_examination_system.action.PoliticsClassAction" scope="prototype">
+		<property name="politicsClassService">
+			<ref local="politicsClassService" />
+		</property>
+		<property name="majorService">
+			<ref local="majorService" />
+		</property>
+		<property name="teacherService">
+			<ref local="teacherService" />
+		</property>
+	</bean>
+	<bean id="studentDAO" class="com.online_examination_system.dao.impl.StudentDAOImpl" scope="singleton">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="studentService" class="com.online_examination_system.service.impl.StudentServiceImpl">
+		<property name="studentDAO">
+			<ref local="studentDAO" />		
+		</property>
+	</bean>
+	<bean id="studentAction" class="com.online_examination_system.action.StudentAction" scope="prototype">
+		<property name="studentService">
+			<ref local="studentService" />
+		</property>
+		<property name="politicsClassService">
+			<ref local="politicsClassService" />
+		</property>
+	</bean>
+	<bean id="courseDAO" class="com.online_examination_system.dao.impl.CourseDAOImpl" scope="singleton">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="courseService" class="com.online_examination_system.service.impl.CourseServiceImpl">
+		<property name="courseDAO">
+			<ref local="courseDAO" />		
+		</property>
+	</bean>
+	<bean id="courseAction" class="com.online_examination_system.action.CourseAction" scope="prototype">
+		<property name="courseService">
+			<ref local="courseService" />
+		</property>
+	</bean>
+	<bean id="questionBankFillDAO" class="com.online_examination_system.dao.impl.QuestionBankFillDAOImpl" scope="singleton">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="questionBankFillService" class="com.online_examination_system.service.impl.QuestionBankFillServiceImpl">
+		<property name="questionBankFillDAO">
+			<ref local="questionBankFillDAO" />		
+		</property>
+	</bean>
+	<bean id="questionBankFillAction" class="com.online_examination_system.action.QuestionBankFillAction" scope="prototype">
+		<property name="questionBankFillService">
+			<ref local="questionBankFillService" />
+		</property>
+		<property name="courseService">
+			<ref local="courseService" />
+		</property>
+		<property name="teacherService">
+			<ref local="teacherService" />
+		</property>
+	</bean>
+	<bean id="questionBankJudgeDAO" class="com.online_examination_system.dao.impl.QuestionBankJudgeDAOImpl" scope="singleton">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="questionBankJudgeService" class="com.online_examination_system.service.impl.QuestionBankJudgeServiceImpl">
+		<property name="questionBankJudgeDAO">
+			<ref local="questionBankJudgeDAO" />		
+		</property>
+	</bean>
+	<bean id="questionBankJudgeAction" class="com.online_examination_system.action.QuestionBankJudgeAction" scope="prototype">
+		<property name="questionBankJudgeService">
+			<ref local="questionBankJudgeService" />
+		</property>
+		<property name="courseService">
+			<ref local="courseService" />
+		</property>
+		<property name="teacherService">
+			<ref local="teacherService" />
+		</property>
+	</bean>
+	<bean id="questionBankSelectDAO" class="com.online_examination_system.dao.impl.QuestionBankSelectDAOImpl" scope="singleton">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="questionBankSelectService" class="com.online_examination_system.service.impl.QuestionBankSelectServiceImpl">
+		<property name="questionBankSelectDAO">
+			<ref local="questionBankSelectDAO" />		
+		</property>
+	</bean>
+	<bean id="questionBankSelectAction" class="com.online_examination_system.action.QuestionBankSelectAction" scope="prototype">
+		<property name="questionBankSelectService">
+			<ref local="questionBankSelectService" />
+		</property>
+		<property name="courseService">
+			<ref local="courseService" />
+		</property>
+		<property name="teacherService">
+			<ref local="teacherService" />
+		</property>
+	</bean>
+	<bean id="questionBankShortAnswerDAO" class="com.online_examination_system.dao.impl.QuestionBankShortAnswerDAOImpl" scope="singleton">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="questionBankShortAnswerService" class="com.online_examination_system.service.impl.QuestionBankShortAnswerServiceImpl">
+		<property name="questionBankShortAnswerDAO">
+			<ref local="questionBankShortAnswerDAO" />		
+		</property>
+	</bean>
+	<bean id="questionBankShortAnswerAction" class="com.online_examination_system.action.QuestionBankShortAnswerAction" scope="prototype">
+		<property name="questionBankShortAnswerService">
+			<ref local="questionBankShortAnswerService" />
+		</property>
+		<property name="courseService">
+			<ref local="courseService" />
+		</property>
+		<property name="teacherService">
+			<ref local="teacherService" />
+		</property>
+	</bean>
+	<bean id="paperFillDAO" class="com.online_examination_system.dao.impl.PaperFillDAOImpl" scope="singleton">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="paperFillService" class="com.online_examination_system.service.impl.PaperFillServiceImpl">
+		<property name="paperFillDAO">
+			<ref local="paperFillDAO" />		
+		</property>
+	</bean>
+	<bean id="paperJudgeDAO" class="com.online_examination_system.dao.impl.PaperJudgeDAOImpl" scope="singleton">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="paperJudgeService" class="com.online_examination_system.service.impl.PaperJudgeServiceImpl">
+		<property name="paperJudgeDAO">
+			<ref local="paperJudgeDAO" />		
+		</property>
+	</bean>
+	<bean id="paperSelectDAO" class="com.online_examination_system.dao.impl.PaperSelectDAOImpl" scope="singleton">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="paperSelectService" class="com.online_examination_system.service.impl.PaperSelectServiceImpl">
+		<property name="paperSelectDAO">
+			<ref local="paperSelectDAO" />		
+		</property>
+	</bean>
+	<bean id="paperShortAnswerDAO" class="com.online_examination_system.dao.impl.PaperShortAnswerDAOImpl" scope="singleton">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="paperShortAnswerService" class="com.online_examination_system.service.impl.PaperShortAnswerServiceImpl">
+		<property name="paperShortAnswerDAO">
+			<ref local="paperShortAnswerDAO" />		
+		</property>
+	</bean>
+	<bean id="ExaminationAction" class="com.online_examination_system.action.ExaminationAction" scope="prototype">
+		<property name="questionBankFillService">
+			<ref local="questionBankFillService" />
+		</property>
+		<property name="questionBankJudgeService">
+			<ref local="questionBankJudgeService" />
+		</property>
+		<property name="questionBankSelectService">
+			<ref local="questionBankSelectService" />
+		</property>
+		<property name="questionBankShortAnswerService">
+			<ref local="questionBankShortAnswerService" />
+		</property>
+		<property name="teacherService">
+			<ref local="teacherService" />
+		</property>
+		<property name="studentService">
+			<ref local="studentService" />
+		</property>
+		<property name="courseService">
+			<ref local="courseService" />
+		</property>
+		
+		<property name="paperFillService">
+			<ref local="paperFillService" />
+		</property>
+		<property name="paperJudgeService">
+			<ref local="paperJudgeService" />
+		</property>
+		<property name="paperSelectService">
+			<ref local="paperSelectService" />
+		</property>
+		<property name="paperShortAnswerService">
+			<ref local="paperShortAnswerService" />
+		</property>
+	</bean>
+</beans>

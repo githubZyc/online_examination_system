@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<package name="login" extends="struts-default">
+		<action name="loginAction" class="loginAction" method="login">
+			<result name="success">/admin/index.htm</result>
+			<result name="error">/admin/loginError.jsp</result>
+		</action>
+		<action name="exitAction" class="loginAction" method="exit">
+			<result name="success">/admin/login.jsp</result>
+		</action>
+	</package>
+
+	<package name="dept" extends="struts-default">
+		<action name="addDeptAction" class="deptAction" method="addDept">
+			<result name="success" type="redirectAction">
+				<param name="actionName">addListDeptAction</param>
+			</result>
+		</action>
+		<action name="addListDeptAction" class="deptAction" method="listDept">
+			<result name="success">/jsp/addListDept.jsp</result>
+		</action>
+		<action name="listDeptAction" class="deptAction" method="listDept">
+			<result name="success">/jsp/listDept.jsp</result>
+		</action>
+		<action name="login" class="userAction" method="login">
+			<result name="success">/index.jsp</result>
+		</action>
+		<action name="deleteAction" class="deptAction" method="deleteDept">
+			<result name="success" type="redirectAction">
+				<param name="actionName">deleteSuccessListDeptAction</param>
+			</result>
+		</action>
+		<action name="deleteSuccessListDeptAction" class="deptAction" method="listDept">
+			<result name="success">/jsp/deleteSuccessList.jsp</result>
+		</action>
+		<action name="updateAction" class="deptAction" method="updateDept">
+			<result name="success" type="redirectAction">
+				<param name="actionName">updateSuccessListDeptAction</param>
+			</result>
+		</action>
+		<action name="updateSuccessListDeptAction" class="deptAction" method="listDept">
+			<result name="success">/jsp/updateSuccessListDept.jsp</result>
+		</action>
+		<action name="findByIdAction" class="deptAction" method="findDeptById">
+			<result name="success">
+				/jsp/updateDept.jsp
+			</result>
+		</action>
+	</package>
+	<package name="major" extends="struts-default">
+		<action name="addMajorListDeptAction" class="majorAction"
+			method="listDept">
+			<result name="success">/jsp/addMajor.jsp</result>
+		</action>
+		<action name="addMajorAction" class="majorAction" method="addMajor">
+			<result name="success" type="redirectAction">
+				<param name="actionName">addMajorSuccessAction</param>
+			</result>
+		</action>
+		<action name="addMajorSuccessAction" class="majorAction"
+			method="listDept">
+			<result name="success">/jsp/addMajorSuccess.jsp</result>
+		</action>
+		<action name="listMajorListDeptAction" class="majorAction"
+			method="listDept">
+			<result name="success">/jsp/listMajorSelectDept.jsp</result>
+		</action>
+		<action name="listMajorAction" class="majorAction" method="listMajor">
+			<result name="success">/jsp/listMajor.jsp</result>
+		</action>
+		<action name="updateMajorAction" class="majorAction" method="updateMajor">
+			<result name="success" type="redirectAction">
+				<param name="actionName">updateMajorSuccessAction</param>
+			</result>
+		</action>
+		<action name="updateMajorSuccessAction" class="majorAction"
+			method="listDept">
+			<result name="success">/jsp/updateMajorSuccess.jsp</result>
+		</action>
+		<action name="findMajorByIdAction" class="majorAction" method="findMajorById">
+			<result name="success">/jsp/updateMajor.jsp</result>
+		</action>
+		<action name="deleteMajorByIdAction" class="majorAction"
+			method="deleteMajorById">
+			<result name="success" type="redirectAction">
+				<param name="actionName">deleteMajorSuccessAction</param>
+			</result>
+		</action>
+		<action name="deleteMajorSuccessAction" class="majorAction"
+			method="listDept">
+			<result name="success">/jsp/deleteMajorSuccess.jsp</result>
+		</action>
+	</package>
+	<package name="teacher" extends="struts-default">
+		<action name="addTeacherAction" class="teacherAction" method="addTeacher">
+			<result name="success" type="redirectAction">
+				<param name="actionName">addTeacherSuccessAction</param>
+			</result>
+		</action>
+		<action name="addTeacherSuccessAction" class="teacherAction" method="listTeacher">
+			<result name="success">/jsp/addTeacherSuccess.jsp</result>
+		</action>
+		<action name="listTeacherAction" class="teacherAction" method="listTeacher">
+			<result name="success">/jsp/listTeacher.jsp</result>
+		</action>
+		<action name="findTeacherByIdAction" class="teacherAction"
+			method="findTeacherById">
+			<result name="success">/jsp/updateTeacher.jsp</result>
+		</action>
+		<action name="updateTeacherAction" class="teacherAction" method="updateTeacher">
+			<result name="success" type="redirectAction">
+				<param name="actionName">updateTeacherSuccessAction</param>
+			</result>
+		</action>
+		<action name="updateTeacherSuccessAction" class="teacherAction" method="listTeacher">
+			<result name="success">/jsp/updateTeacherSuccess.jsp</result>
+		</action>
+		<action name="deleteTeacherAction"  class="teacherAction" method="deleteTeacher">
+			<result name="success" type="redirectAction">
+				<param name="actionName">listTeacherAction</param>
+			</result>
+		</action>
+		<action name="deleteTeacherSuccessAction" class="teacherAction" method="listTeacher">
+			<result name="success">/jsp/deleteTeacherSuccess.jsp</result>
+		</action>
+	</package>
+	<package name="politicsClass" extends="struts-default">
+		<action name="addPoliticsClassListMajorTeacherAction" class="politicsClassAction" method="listMajorTeacher">
+			<result name="success">/jsp/addPoliticsClass.jsp</result>
+		</action>
+		<action name="addPoliticsClassAction" class="politicsClassAction" method="addPoliticsClass">
+			<result name="success" type="redirectAction">
+				<param name="actionName">addPoliticsClassSuccessAction</param>
+			</result>
+		</action>
+		<action name="addPoliticsClassSuccessAction" class="politicsClassAction" method="listMajorTeacher">
+			<result name="success">/jsp/addPoliticsClassSuccess.jsp</result>
+		</action>
+		<action name="searchPoliticsClassListMajorTeacherAction" class="politicsClassAction" method="listMajorTeacher">
+			<result name="success">/jsp/searchPoliticsClass.jsp</result>
+		</action>
+		<action name="searchPoliticsClassAction" class="politicsClassAction" method="searchPoliticsClass">
+			<result name="success">/jsp/listPoliticsClass.jsp</result>
+		</action>
+		<action name="findPoliticsClassByIdAction" class="politicsClassAction" method="findPoliticsClassById">
+			<result name="success">/jsp/updatePoliticsClass.jsp</result>
+		</action>
+		<action name="updatePoliticsClassAction" class="politicsClassAction" method="updatePoliticsClass">
+			<result name="success" type="redirectAction">
+				<param name="actionName">updatePoliticsClassSuccessAction</param>
+			</result>
+		</action>
+		<action name="updatePoliticsClassSuccessAction" class="politicsClassAction" method="listMajorTeacher">
+			<result name="success">/jsp/updatePoliticsClassSuccess.jsp</result>
+		</action>
+		<action name="deletePoliticsClassAction" class="politicsClassAction" method="deletePoliticsClass">
+			<result name="success" type="redirectAction">
+				<param name="actionName">deletePoliticsClassSuccessAction</param>
+			</result>
+		</action>
+		<action name="deletePoliticsClassSuccessAction" class="politicsClassAction" method="listMajorTeacher">
+			<result name="success">/jsp/deletePoliticsClassSuccess.jsp</result>
+		</action>
+	</package>
+	<package name="student" extends="struts-default">
+		<action name="addStudentListPoliticsClassAction" class="studentAction" method="listPoliticsClass">
+			<result name="success">/jsp/addStudent.jsp</result>
+		</action>
+		<action name="addStudentAction" class="studentAction" method="addStudent">
+			<result name="success" type="redirectAction">
+				<param name="actionName">addStudentSuccessAction</param>
+			</result>
+		</action>
+		<action name="addStudentSuccessAction" class="studentAction" method="listPoliticsClass">
+			<result name="success">/jsp/addStudentSuccess.jsp</result>
+		</action>
+		<action name="searchStudentListPoliticsClassAction" class="studentAction" method="listPoliticsClass">
+			<result name="success">/jsp/searchStudent.jsp</result>
+		</action>
+		<action name="searchStudentAction" class="studentAction" method="searchStudent">
+			<result name="success">/jsp/listStudent.jsp</result>
+		</action>
+		<action name="findStudentByIdAction" class="studentAction" method="findStudentById">
+			<result name="success">/jsp/updateStudent.jsp</result>
+		</action>
+		<action name="updateStudentAction" class="studentAction" method="updateStudent">
+			<result name="success" type="redirectAction">
+				<param name="actionName">updateStudentSuccessAction</param>
+			</result>
+		</action>
+		<action name="updateStudentSuccessAction" class="studentAction" method="listPoliticsClass">
+			<result name="success">/jsp/updateStudentSuccess.jsp</result>
+		</action>
+		<action name="deleteStudentAction" class="studentAction" method="deleteStudent">
+			<result name="success" type="redirectAction">
+				<param name="actionName">deleteStudentSuccessAction</param>
+			</result>
+		</action>
+		<action name="deleteStudentSuccessAction" class="studentAction" method="listPoliticsClass">
+			<result name="success">/jsp/deleteStudentSuccess.jsp</result>
+		</action>
+	</package>
+	<package name="course" extends="struts-default">
+		<action name="addCourseAction" class="courseAction" method="addCourse">
+			<result name="success">/jsp/addCourse.jsp</result>
+		</action>
+		<action name="listCourseAction" class="courseAction" method="listCourse">
+			<result name="success">/jsp/listCoure.jsp</result>
+		</action>
+		<action name="findCourseByIdAction" class="courseAction" method="findCourseById">
+			<result name="success">/jsp/updateCourse.jsp</result>
+		</action>
+		<action name="updateCourseAction" class="courseAction" method="updateCourse">
+			<result name="success" type="redirectAction">
+				<param name="actionName">listCourseAction</param>
+			</result>
+		</action>
+		<action name="deleteCourseAction" class="courseAction" method="deleteCourse">
+			<result name="success" type="redirectAction">
+				<param name="actionName">listCourseAction</param>
+			</result>
+		</action>
+	</package>
+	
+	<package name="questionBankSelect" extends="struts-default">
+		<action name="addSeleteListCourseAction" class="questionBankSelectAction" method="listCourse">
+			<result name="success">/jsp/addQuestionBankSelect.jsp</result>
+		</action>
+		<action name="addQuestionBankSelectAction" class="questionBankSelectAction" method="addQuestionBankSelect">
+			<result name="success">/jsp/addQuestionBankSelect.jsp</result>
+		</action>
+		<action name="searchSeleteListCourseAction" class="questionBankSelectAction" method="listCourseTeacher">
+			<result name="success">/jsp/searchQuestionBankSelectListCourse.jsp</result>
+		</action>
+		<action name="searchQuestionBankSelectAction" class="questionBankSelectAction" method="searchQuestionBankSelect">
+			<result name="success">/jsp/listQuestionBankSelect.jsp</result>
+		</action>
+		<action name="findQuestionBankSelectByIdAction" class="questionBankSelectAction" method="findQuestionBankSelectById">
+			<result name="success">/jsp/updateQuestionBankSelect.jsp</result>
+		</action>
+		<action name="updateQuestionBankSelectAction" class="questionBankSelectAction" method="updateQuestionBankSelect">
+			<result name="success" type="redirectAction">
+				<param name="actionName">updateQuestionBankSelectSuccessAction</param>
+			</result>
+		</action>
+		<action name="updateQuestionBankSelectSuccessAction" class="questionBankSelectAction" method="listCourseTeacher">
+			<result name="success">/jsp/updateQuestionBankSelectSuccess.jsp</result>
+		</action>
+		<action name="deleteQuestionBankSelectAction" class="questionBankSelectAction" method="deleteQuestionBankSelect">
+			<result name="success" type="redirectAction">
+				<param name="actionName">deleteQuestionBankSelectSuccessAction</param>
+			</result>
+		</action>
+		<action name="deleteQuestionBankSelectSuccessAction" class="questionBankSelectAction" method="listCourseTeacher">
+			<result name="success">/jsp/deleteQuestionBankSelectSuccess.jsp</result>
+		</action>
+	</package>
+	<package name="questionBankJudge" extends="struts-default">
+		<action name="addJudgeListCourseAction"  class="questionBankJudgeAction" method="listCourse">
+			<result name="success">/jsp/addQuestionBankJudge.jsp</result>
+		</action>
+		<action name="addQuestionBankJudgeAction" class="questionBankJudgeAction" method="addQuestionBankJudge">
+			<result name="success">/jsp/addQuestionBankJudge.jsp</result>
+		</action>
+		<action name="searchJudgeListCourseAction" class="questionBankJudgeAction" method="searchJudgeListCourse">
+			<result name="success">/jsp/searchQuestionBankJudgeListCourse.jsp</result>
+		</action>
+		<action name="searchQuestionBankJudgeAction" class="questionBankJudgeAction" method="searchQuestionBankJudge">
+			<result name="success">/jsp/listQuestionBankJudge.jsp</result>
+		</action>
+		<action name="findQuestionBankJudgeByIdAction" class="questionBankJudgeAction" method="findQuestionBankJudgeById">
+			<result name="success">/jsp/updateQuestionBankJudge.jsp</result>
+		</action>
+		<action name="updateQuestionBankJudgeAction"  class="questionBankJudgeAction" method="updateQuestionBankJudgeAction">
+			<result name="success" type="redirectAction">
+				<param name="actionName">updateQuestionBankJudgeSuccessAction</param>
+			</result>
+		</action>
+		<action name="updateQuestionBankJudgeSuccessAction" class="questionBankJudgeAction" method="searchJudgeListCourse">
+			<result name="success">/jsp/updateQuestionBankJudgeSuccess.jsp</result>
+		</action>
+		<action name="deleteQuestionBankJudgeAction"  class="questionBankJudgeAction" method="deleteQuestionBankJudge">
+			<result name="success" type="redirectAction">
+				<param name="actionName">updateQuestionBankJudgeSuccessAction</param>
+			</result>
+		</action>
+		<action name="deleteQuestionBankJudgeSuccessAction" class="questionBankJudgeAction" method="searchJudgeListCourse">
+			<result name="success">/jsp/deleteQuestionBankJudgeSuccess.jsp</result>
+		</action>
+		
+	</package>
+	<package name="questionBankFill" extends="struts-default">
+		<action name="addFillListCourseAction"  class="questionBankFillAction" method="listCourse">
+			<result name="success">/jsp/addQuestionBankFill.jsp</result>
+		</action>
+		<action name="addQuestionBankFillAction" class="questionBankFillAction" method="addQuestionBankFill">
+			<result name="success">/jsp/addQuestionBankFill.jsp</result>
+		</action>
+		<action name="searchFillListCourseAction" class="questionBankFillAction" method="searchFillListCourse">
+			<result name="success">/jsp/searchQuestionBankFillListCourse.jsp</result>
+		</action>
+		<action name="searchQuestionBankFillAction" class="questionBankFillAction" method="searchQuestionBankFill">
+			<result name="success">/jsp/listQuestionBankFill.jsp</result>
+		</action>
+		<action name="findQuestionBankFillByIdAction" class="questionBankFillAction" method="findQuestionBankFillById">
+			<result name="success">/jsp/updateQuestionBankFill.jsp</result>
+		</action>
+		<action name="updateQuestionBankFillAction" class="questionBankFillAction" method="updateQuestionBankFill">
+			<result name="success" type="redirectAction">
+				<param name="actionName">updateQuestionBankFillSuccessAction</param>
+			</result>
+		</action>
+		<action name="updateQuestionBankFillSuccessAction" class="questionBankFillAction" method="searchFillListCourse">
+			<result name="success">/jsp/updateQuestionBankFillSuccess.jsp</result>
+		</action>
+		<action name="deleteQuestionBankFillAction" class="questionBankFillAction" method="deleteQuestionBankFill">
+			<result name="success" type="redirectAction">
+				<param name="actionName">deleteQuestionBankFillSuccessAction</param>
+			</result>
+		</action>
+		<action name="deleteQuestionBankFillSuccessAction" class="questionBankFillAction" method="searchFillListCourse">
+			<result name="success">/jsp/deleteQuestionBankFillSuccess.jsp</result>
+		</action>
+	</package>
+	<package name="questionBankShortAnswer" extends="struts-default">
+		<action name="addShortAnswerListCourseAction"  class="questionBankShortAnswerAction" method="listCourse">
+			<result name="success">/jsp/addQuestionBankShortAnswer.jsp</result>
+		</action>
+		<action name="addQuestionBankShortAnswerAction"  class="questionBankShortAnswerAction" method="addQuestionBankShortAnswer">
+			<result name="success">/jsp/addQuestionBankShortAnswer.jsp</result>
+		</action>
+		<action name="searchShortAnswerListCourseAction"  class="questionBankShortAnswerAction" method="searchShortAnswerListCourse">
+			<result name="success">/jsp/searchQuestionBankShortAnswerListCourse.jsp</result>
+		</action>
+		<action name="searchQuestionBankShortAnswerAction"  class="questionBankShortAnswerAction" method="searchQuestionBankShortAnswer">
+			<result name="success">/jsp/listQuestionBankShortAnswer.jsp</result>
+		</action>
+		<action name="findQuestionBankShortAnswerByIdAction"  class="questionBankShortAnswerAction" method="findQuestionBankShortAnswerById">
+			<result name="success">/jsp/updateQuestionBankShortAnswer.jsp</result>
+		</action>
+		<action name="updateQuestionBankShortAnswerAction"  class="questionBankShortAnswerAction" method="updateQuestionBankShortAnswer">
+			<result name="success" type="redirectAction">
+				<param name="actionName">updateQuestionBankShortAnswerSuccessAction</param>
+			</result>
+		</action>
+		<action name="updateQuestionBankShortAnswerSuccessAction"  class="questionBankShortAnswerAction" method="searchShortAnswerListCourse">
+			<result name="success">/jsp/updateQuestionBankShortAnswerSuccess.jsp</result>
+		</action>
+		<action name="deleteQuestionBankShortAnswerAction"  class="questionBankShortAnswerAction" method="deleteQuestionBankShortAnswer">
+			<result name="success" type="redirectAction">
+				<param name="actionName">deleteQuestionBankShortAnswerSuccessAction</param>
+			</result>
+		</action>
+		<action name="deleteQuestionBankShortAnswerSuccessAction"  class="questionBankShortAnswerAction" method="searchShortAnswerListCourse">
+			<result name="success">/jsp/deleteQuestionBankShortAnswerSuccess.jsp</result>
+		</action>
+	</package>
+	<package name="Examination" extends="struts-default">
+		<action name="createPaperListCourseAction" class="ExaminationAction" method="createPaperListCourse">
+			<result name="success">/jsp/createPaper.jsp</result>
+		</action>
+		<action name="createPaperAction" class="ExaminationAction" method="createPaper">
+			<result name="success">/jsp/createPaper.jsp</result>
+		</action>
+		<action name="listPaperNameAction" class="ExaminationAction" method="listPaperName">
+			<result name="success">/jsp/selectPaper.jsp</result>
+		</action>
+		<action name="onlineExaminationErrorAction" class="ExaminationAction" method="listPaperName">
+			<result name="success">/jsp/onlineExaminationError.jsp</result>
+		</action>
+		<action name="onlineExaminationAction" class="ExaminationAction" method="onlineExamination">
+			<result name="success">/admin/onlineExamination.jsp</result>
+			<result name="error" type="redirectAction">
+				<param name="actionName">onlineExaminationErrorAction</param>
+			</result>
+		</action>
+		<action name="examSelectAction" class="ExaminationAction" method="examSelect">
+			<result name="success">../jsp/onlineExaminationSelect.jsp</result>
+		</action>
+		<action name="getSelectOptionsAction" class="ExaminationAction" method="getSelectOptions">
+			<result name="success">../jsp/onlineExaminationSelect.jsp</result>
+		</action>
+		<action name="examingSelectAction"  class="ExaminationAction" method="examingSelect">
+			<result name="success">/jsp/onlineExaminationSelect.jsp</result>
+		</action>
+		<action name="examJudgeAction" class="ExaminationAction" method="examJudge">
+			<result name="success">../jsp/onlineExaminationJudge.jsp</result>
+		</action>
+		<action name="examJudgeAction" class="ExaminationAction" method="examJudge">
+			<result name="success">../jsp/onlineExaminationJudge.jsp</result>
+		</action>
+		<action name="examingJudgeAction"  class="ExaminationAction" method="examingJudge">
+			<result name="success">/jsp/onlineExaminationJudge.jsp</result>
+		</action>
+		<action name="examFillAction" class="ExaminationAction" method="examFill">
+			<result name="success">../jsp/onlineExaminationFill.jsp</result>
+		</action>
+		<action name="examingFillAction" class="ExaminationAction" method="examingFill">
+			<result name="success">/jsp/onlineExaminationFill.jsp</result>
+		</action>
+		<action name="examShortAnswerAction" class="ExaminationAction" method="examShortAnswer">
+			<result name="success">../jsp/onlineExaminationShortAnswer.jsp</result>
+		</action>
+		<action name="examingShortAnswerAction" class="ExaminationAction" method="examingShortAnswer">
+			<result name="success">/jsp/onlineExaminationShortAnswer.jsp</result>
+		</action>
+		<action name="findGradeCourseAction" class="ExaminationAction" method="findGradeCourse">
+			<result name="success">/jsp/selectCourseGrade.jsp</result>
+		</action>
+		<action name="listPaperQuetionTypeAction" class="ExaminationAction" method="listPaperQuetionType">
+			<result name="success">/jsp/selectPaperQuetionType.jsp</result>
+		</action>
+		<action name="forwardTypeAction" class="ExaminationAction" method="forwardType">
+			<result name="FillType">/jsp/FillType.jsp</result>
+			<result name="ShortAnswerType">/jsp/ShortAnswerType.jsp</result>
+		</action>
+		<action name="updateFillBeanAction" class="ExaminationAction" method="updateFillBean">
+			<result name="success">/jsp/FillType.jsp</result>
+		</action>
+		<action name="updateShortAnswerBeanAction" class="ExaminationAction" method="updateShortAnswerBean">
+			<result name="success">/jsp/ShortAnswerType.jsp</result>
+		</action>
+	</package>
+</struts>
